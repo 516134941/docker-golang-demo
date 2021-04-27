@@ -4,7 +4,7 @@ import (
 	"flag"
 	"net/http"
 
-	"test/dockertest/config"
+	"docker-golang-demo/config"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-xweb/log"
