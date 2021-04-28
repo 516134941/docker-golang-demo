@@ -67,3 +67,8 @@ docker run -p 8082:8082 dockertest
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190418163706270.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2FmMjI1MTMzNw==,size_16,color_FFFFFF,t_70)
 成功运行，页面输入http://localhost:8082/  成功访问
 
+如果需要容器后台运行,指令加入 -d 就行了
+```
+docker run -p 8082:8082 -d dockertest
+```
+
