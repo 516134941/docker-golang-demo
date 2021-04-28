@@ -72,3 +72,22 @@ docker run -p 8082:8082 dockertest
 docker run -p 8082:8082 -d dockertest
 ```
 
+
+更新后的dockerfile 使用多阶段构建 加入go mod,在docker镜像制作时进行编译
+```
+FROM golang:1.16 as build
+
+ENV GOPROXY https://goproxy.cn/
+ENV GO111MODULE on
+WORKDIR /go/src/docker-golang-demo
+COPY . ./
+RUN go mod download
+
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build main.go
+
+FROM scratch as prod
+COPY --from=build /go/src/docker-golang-demo/main /
+COPY --from=build /go/src/docker-golang-demo/test.toml /
+EXPOSE 8082
+CMD ["./main","-config=./test.toml"]
+```
